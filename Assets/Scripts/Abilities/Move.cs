@@ -22,6 +22,7 @@ public class Move : MonoBehaviour
     private Rigidbody2D rb;
     private GroundCheck ground;
     private Controller control;
+    private Animator animator;
     
     void Start()
     {
@@ -29,6 +30,7 @@ public class Move : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         ground = GetComponent<GroundCheck>();
         control = GetComponent<Controller>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -53,6 +55,7 @@ public class Move : MonoBehaviour
         maxSpeedChange = acceleration * Time.deltaTime;
         velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
         rb.velocity = velocity;
+        animator.SetFloat("Speed", Mathf.Abs(velocity.x));
     }
 
     private void Flip()
