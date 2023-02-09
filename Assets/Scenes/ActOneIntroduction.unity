@@ -449,7 +449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpHeight: 3
-  maxAirJumps: 0
+  maxAirJumps: 1
   downwardMovementMultiplier: 3
   upwardMovementMultiplier: 1.7
 --- !u!95 &618345949
@@ -559,7 +559,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10.876716
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

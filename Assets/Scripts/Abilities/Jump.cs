@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [RequireComponent(typeof(Controller))]
@@ -30,6 +31,10 @@ public class Jump : MonoBehaviour
         control = GetComponent<Controller>();
         animator = GetComponent<Animator>();
         defaultGravityScale = 1f;
+        if (maxAirJumps > 0)
+        {
+            animator.SetBool("doubleJumpAvailable", true);
+        }
     }
 
     void Update()
@@ -42,26 +47,41 @@ public class Jump : MonoBehaviour
         onGround = ground.GetGround();
         velocity = rb.velocity;
 
-        if (onGround)
+        if (onGround) // Reset jump counter back to 0 when landing on ground
         {
             jumpPhase = 0;
         }
-        if (jumpRequest)
+        if (jumpRequest) // If spacebar is pressed and a jump is request
         {
             jumpRequest = false;
             JumpMovement();
         }
-        if (rb.velocity.y > 0)
+        if (rb.velocity.y > 0) // Upwards movement
         {
             rb.gravityScale = upwardMovementMultiplier;
-            animator.SetBool("isJump", true);
+            if (jumpPhase == 0)
+            {
+                animator.SetBool("isJump", true);
+            }
+            if (jumpPhase == 1)
+            {
+                animator.SetBool("isJump", false);
+                animator.SetBool("isDoubleJump", true);
+            }
         }
-        if (rb.velocity.y < 0)
+        if (rb.velocity.y < 0) // Downwards movement
         {
             rb.gravityScale = downwardMovementMultiplier;
-            animator.SetBool("isJump", false);
+            if (jumpPhase == 0)
+            {
+                animator.SetBool("isJump", false);
+            }
+            if (jumpPhase == 1)
+            {
+                animator.SetBool("isDoubleJump", false);
+            }
         }
-        if (rb.velocity.y == 0)
+        if (rb.velocity.y == 0) // On ground OR no vertical movement
         {
             rb.gravityScale = defaultGravityScale;
         }
@@ -70,7 +90,7 @@ public class Jump : MonoBehaviour
 
     private void JumpMovement()
     {
-        if (onGround || jumpPhase < maxAirJumps)
+        if (onGround || jumpPhase < maxAirJumps) // Check if jump is available
         {
             ++jumpPhase;
             jumpSpeed = Mathf.Sqrt(-2f * Physics2D.gravity.y * jumpHeight);
