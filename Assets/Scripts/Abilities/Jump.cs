@@ -14,6 +14,7 @@ public class Jump : MonoBehaviour
     private Rigidbody2D rb;
     private GroundCheck ground;
     private Controller control;
+    private Animator animator;
 
     private int jumpPhase;
     private float jumpSpeed;
@@ -27,6 +28,7 @@ public class Jump : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         ground = GetComponent<GroundCheck>();
         control = GetComponent<Controller>();
+        animator = GetComponent<Animator>();
         defaultGravityScale = 1f;
     }
 
@@ -52,17 +54,19 @@ public class Jump : MonoBehaviour
         if (rb.velocity.y > 0)
         {
             rb.gravityScale = upwardMovementMultiplier;
+            animator.SetBool("isJump", true);
         }
         if (rb.velocity.y < 0)
         {
             rb.gravityScale = downwardMovementMultiplier;
+            animator.SetBool("isJump", false);
         }
         if (rb.velocity.y == 0)
         {
             rb.gravityScale = defaultGravityScale;
         }
         rb.velocity = velocity;
-    }
+    }       
 
     private void JumpMovement()
     {
