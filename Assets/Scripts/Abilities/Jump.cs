@@ -59,27 +59,10 @@ public class Jump : MonoBehaviour
         if (rb.velocity.y > 0) // Upwards movement
         {
             rb.gravityScale = upwardMovementMultiplier;
-            if (jumpPhase == 0)
-            {
-                animator.SetBool("isJump", true);
-            }
-            if (jumpPhase == 1)
-            {
-                animator.SetBool("isJump", false);
-                animator.SetBool("isDoubleJump", true);
-            }
         }
         if (rb.velocity.y < 0) // Downwards movement
         {
             rb.gravityScale = downwardMovementMultiplier;
-            if (jumpPhase == 0)
-            {
-                animator.SetBool("isJump", false);
-            }
-            if (jumpPhase == 1)
-            {
-                animator.SetBool("isDoubleJump", false);
-            }
         }
         if (rb.velocity.y == 0) // On ground OR no vertical movement
         {
