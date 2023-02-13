@@ -38,6 +38,7 @@ public class Jump : MonoBehaviour
     void Update()
     {
         jumpRequest |= control.input.RetrieveJumpInput();
+        Debug.Log(rb.velocity.y);
     }
 
     private void FixedUpdate()
@@ -48,6 +49,8 @@ public class Jump : MonoBehaviour
         if (onGround) // Reset jump counter back to 0 when landing on ground
         {
             jumpPhase = 0;
+            animator.SetBool("isJump", false);
+            animator.SetBool("isDoubleJump", false); // Problem: animation will continue playing until ground contact
         }
         if (jumpRequest) // If spacebar is pressed and a jump is request
         {
@@ -67,13 +70,21 @@ public class Jump : MonoBehaviour
             rb.gravityScale = defaultGravityScale;
         }
         rb.velocity = velocity;
-    }       
-
+    }
+    
     private void JumpMovement()
     {
         if (onGround || jumpPhase < maxJumps) // Check if jump is available
         {
             ++jumpPhase;
+            if (jumpPhase == 1)
+            {
+                animator.SetBool("isJump", true);
+            }
+            if (jumpPhase == 2)
+            {
+                animator.SetBool("isDoubleJump", true);
+            }
             jumpSpeed = Mathf.Sqrt(-2f * Physics2D.gravity.y * jumpHeight);
             if (velocity.y > 0)
             {
@@ -83,13 +94,7 @@ public class Jump : MonoBehaviour
             {
                 jumpSpeed += Mathf.Abs(rb.velocity.y);
             }
-            velocity.y = jumpSpeed;
+            velocity.y += jumpSpeed;
         }
-    }
-
-    private void UpdateAnimationState()
-    {
-        JumpState state;
-        
     }
 }
