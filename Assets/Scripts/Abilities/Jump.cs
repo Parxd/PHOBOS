@@ -31,10 +31,6 @@ public class Jump : MonoBehaviour
         control = GetComponent<Controller>();
         animator = GetComponent<Animator>();
         defaultGravityScale = 1f;
-        if (maxAirJumps > 0)
-        {
-            animator.SetBool("doubleJumpAvailable", true);
-        }
     }
 
     void Update()
@@ -50,6 +46,7 @@ public class Jump : MonoBehaviour
         if (onGround) // Reset jump counter back to 0 when landing on ground
         {
             jumpPhase = 0;
+            Debug.Log("jumpPhase reset");
         }
         if (jumpRequest) // If spacebar is pressed and a jump is request
         {
@@ -86,6 +83,7 @@ public class Jump : MonoBehaviour
                 jumpSpeed += Mathf.Abs(rb.velocity.y);
             }
             velocity.y = jumpSpeed;
+            Debug.Log(jumpPhase);
         }
     }
 }
