@@ -7,7 +7,7 @@ using UnityEngine;
 public class Jump : MonoBehaviour
 {
     [SerializeField, Range(0f, 10f)] private float jumpHeight = 3f;
-    [SerializeField, Range(0, 5)] private int maxAirJumps = 0;
+    [SerializeField, Range(0, 5)] private int maxJumps = 2;
     [SerializeField, Range(0f, 5f)] private float downwardMovementMultiplier = 3f;
     [SerializeField, Range(0f, 5f)] private float upwardMovementMultiplier = 1.7f;
 
@@ -23,6 +23,8 @@ public class Jump : MonoBehaviour
 
     private bool jumpRequest;
     private bool onGround;
+
+    private enum JumpState {singleJump, doubleJump}
 
     void Start()
     {
@@ -46,7 +48,6 @@ public class Jump : MonoBehaviour
         if (onGround) // Reset jump counter back to 0 when landing on ground
         {
             jumpPhase = 0;
-            Debug.Log("jumpPhase reset");
         }
         if (jumpRequest) // If spacebar is pressed and a jump is request
         {
@@ -70,7 +71,7 @@ public class Jump : MonoBehaviour
 
     private void JumpMovement()
     {
-        if (onGround || jumpPhase < maxAirJumps) // Check if jump is available
+        if (onGround || jumpPhase < maxJumps) // Check if jump is available
         {
             ++jumpPhase;
             jumpSpeed = Mathf.Sqrt(-2f * Physics2D.gravity.y * jumpHeight);
@@ -83,7 +84,12 @@ public class Jump : MonoBehaviour
                 jumpSpeed += Mathf.Abs(rb.velocity.y);
             }
             velocity.y = jumpSpeed;
-            Debug.Log(jumpPhase);
         }
+    }
+
+    private void UpdateAnimationState()
+    {
+        JumpState state;
+        
     }
 }
