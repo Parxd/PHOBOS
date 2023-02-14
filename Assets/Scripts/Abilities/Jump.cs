@@ -10,6 +10,7 @@ public class Jump : MonoBehaviour
     [SerializeField, Range(0, 5)] private int maxJumps = 2;
     [SerializeField, Range(0f, 5f)] private float downwardMovementMultiplier = 3f;
     [SerializeField, Range(0f, 5f)] private float upwardMovementMultiplier = 1.7f;
+    [SerializeField, Range(0f, 0.3f)] private float jumpBufferTime = 0.2f;
 
     private Vector2 velocity;
     private Rigidbody2D rb;
@@ -20,11 +21,10 @@ public class Jump : MonoBehaviour
     private int jumpPhase;
     private float jumpSpeed;
     private float defaultGravityScale;
+    private float jumpBufferCounter;
 
     private bool jumpRequest;
     private bool onGround;
-
-    private enum JumpState {singleJump, doubleJump}
 
     void Start()
     {
@@ -63,13 +63,21 @@ public class Jump : MonoBehaviour
         if (jumpRequest) // If spacebar is pressed and a jump is request
         {
             jumpRequest = false;
+            jumpBufferCounter = jumpBufferTime;
+        }
+        else if (!jumpRequest && jumpBufferCounter > 0)
+        {
+            jumpBufferCounter -= Time.deltaTime;
+        }
+        if (jumpBufferCounter > 0)
+        {
             JumpMovement();
         }
-        if (rb.velocity.y > 0) // Upwards movement
+        if (control.input.RetrieveJumpHoldInput() && rb.velocity.y > 0) // Upwards movement
         {
             rb.gravityScale = upwardMovementMultiplier;
         }
-        if (rb.velocity.y < 0) // Downwards movement
+        if (!control.input.RetrieveJumpHoldInput() || rb.velocity.y < 0) // Downwards movement
         {
             rb.gravityScale = downwardMovementMultiplier;
         }
@@ -85,6 +93,7 @@ public class Jump : MonoBehaviour
         if (onGround || jumpPhase < maxJumps) // Check if jump is available
         {
             ++jumpPhase;
+            jumpBufferCounter = 0;
             if (jumpPhase == 1)
             {
                 animator.SetBool("isJump", true);

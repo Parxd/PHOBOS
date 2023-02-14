@@ -26,17 +26,17 @@ public class GroundCheck : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        EvaluateCollision(collision);
+        EvaluateCollision();
         RetrieveFriction(collision);
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        EvaluateCollision(collision);
+        EvaluateCollision();
         RetrieveFriction(collision);
     }
 
-    private void EvaluateCollision(Collision2D collision)
+    private void EvaluateCollision()
     {
         onGround = Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
     }
