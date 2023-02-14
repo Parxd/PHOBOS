@@ -7,7 +7,7 @@ using UnityEngine;
 public class Jump : MonoBehaviour
 {
     [SerializeField, Range(0f, 10f)] private float jumpHeight = 3f;
-    [SerializeField, Range(0, 5)] private int maxAirJumps = 0;
+    [SerializeField, Range(0, 5)] private int maxJumps = 2;
     [SerializeField, Range(0f, 5f)] private float downwardMovementMultiplier = 3f;
     [SerializeField, Range(0f, 5f)] private float upwardMovementMultiplier = 1.7f;
 
@@ -24,6 +24,8 @@ public class Jump : MonoBehaviour
     private bool jumpRequest;
     private bool onGround;
 
+    private enum JumpState {singleJump, doubleJump}
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -31,15 +33,22 @@ public class Jump : MonoBehaviour
         control = GetComponent<Controller>();
         animator = GetComponent<Animator>();
         defaultGravityScale = 1f;
-        if (maxAirJumps > 0)
-        {
-            animator.SetBool("doubleJumpAvailable", true);
-        }
     }
 
     void Update()
     {
         jumpRequest |= control.input.RetrieveJumpInput();
+        if (rb.velocity.y < 0)
+        {
+            if (jumpPhase == 1)
+            {
+                animator.SetBool("isJump", false);
+            }
+            if (jumpPhase == 2)
+            {
+                animator.SetBool("isDoubleJump", false);
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -59,40 +68,32 @@ public class Jump : MonoBehaviour
         if (rb.velocity.y > 0) // Upwards movement
         {
             rb.gravityScale = upwardMovementMultiplier;
-            if (jumpPhase == 0)
-            {
-                animator.SetBool("isJump", true);
-            }
-            if (jumpPhase == 1)
-            {
-                animator.SetBool("isJump", false);
-                animator.SetBool("isDoubleJump", true);
-            }
         }
         if (rb.velocity.y < 0) // Downwards movement
         {
             rb.gravityScale = downwardMovementMultiplier;
-            if (jumpPhase == 0)
-            {
-                animator.SetBool("isJump", false);
-            }
-            if (jumpPhase == 1)
-            {
-                animator.SetBool("isDoubleJump", false);
-            }
         }
         if (rb.velocity.y == 0) // On ground OR no vertical movement
         {
             rb.gravityScale = defaultGravityScale;
         }
         rb.velocity = velocity;
-    }       
-
+    }
+    
     private void JumpMovement()
     {
-        if (onGround || jumpPhase < maxAirJumps) // Check if jump is available
+        if (onGround || jumpPhase < maxJumps) // Check if jump is available
         {
             ++jumpPhase;
+            if (jumpPhase == 1)
+            {
+                animator.SetBool("isJump", true);
+            }
+            if (jumpPhase == 2)
+            {
+                animator.SetBool("isJump", false); // In case of double jumping without time to fall
+                animator.SetBool("isDoubleJump", true);
+            }
             jumpSpeed = Mathf.Sqrt(-2f * Physics2D.gravity.y * jumpHeight);
             if (velocity.y > 0)
             {
@@ -102,7 +103,7 @@ public class Jump : MonoBehaviour
             {
                 jumpSpeed += Mathf.Abs(rb.velocity.y);
             }
-            velocity.y = jumpSpeed;
+            velocity.y += jumpSpeed;
         }
     }
 }

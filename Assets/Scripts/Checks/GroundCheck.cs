@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class GroundCheck : MonoBehaviour
 {
+    [SerializeField] private LayerMask jumpableGround;
+    private BoxCollider2D bc;
     public bool onGround;
     public float friction;
+
+    private void Start()
+    {
+        bc = GetComponent<BoxCollider2D>();
+    }
 
     public bool GetGround()
     {
@@ -29,19 +36,9 @@ public class GroundCheck : MonoBehaviour
         RetrieveFriction(collision);
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        onGround = false;
-        friction = 0.0f;
-    }
-
     private void EvaluateCollision(Collision2D collision)
     {
-        for (int i = 0; i < collision.contactCount; ++i)
-        {
-            Vector2 normal = collision.GetContact(i).normal;
-            onGround |= (normal.y > 0.9f);
-        }
+        onGround = Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
     }
 
     private void RetrieveFriction(Collision2D collision)
