@@ -20,7 +20,7 @@ public class Move : MonoBehaviour
 
     private SpriteRenderer sprite;
     private Rigidbody2D rb;
-    private GroundCheck ground;
+    private GroundWallCheck ground;
     private Controller control;
     private Animator animator;
     
@@ -28,7 +28,7 @@ public class Move : MonoBehaviour
     {
         sprite = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
-        ground = GetComponent<GroundCheck>();
+        ground = GetComponent<GroundWallCheck>();
         control = GetComponent<Controller>();
         animator = GetComponent<Animator>();
     }

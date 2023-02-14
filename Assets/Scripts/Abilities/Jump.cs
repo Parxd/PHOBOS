@@ -14,7 +14,7 @@ public class Jump : MonoBehaviour
 
     private Vector2 velocity;
     private Rigidbody2D rb;
-    private GroundCheck ground;
+    private GroundWallCheck ground;
     private Controller control;
     private Animator animator;
 
@@ -29,7 +29,7 @@ public class Jump : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        ground = GetComponent<GroundCheck>();
+        ground = GetComponent<GroundWallCheck>();
         control = GetComponent<Controller>();
         animator = GetComponent<Animator>();
         defaultGravityScale = 1f;
