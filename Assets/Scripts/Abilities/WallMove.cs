@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 [RequireComponent(typeof(Controller))]
 public class WallMove : MonoBehaviour
 {
@@ -18,7 +17,9 @@ public class WallMove : MonoBehaviour
     private Controller _controller;
 
     private Vector2 _velocity;
-    private bool _onWall, _onGround, _desiredJump;
+    private bool _onWall;
+    private bool _onGround; 
+    private bool _desiredJump;
     private float _wallDirectionX;
 
     // Start is called before the first frame update
@@ -36,7 +37,6 @@ public class WallMove : MonoBehaviour
         {
             _desiredJump |= _controller.input.RetrieveJumpInput();
         }
-        Debug.Log(_onWall);
     }
 
     private void FixedUpdate()
@@ -46,7 +46,7 @@ public class WallMove : MonoBehaviour
         _onGround = _collisionDataRetriever.onGround;
         _wallDirectionX = _collisionDataRetriever.contactNormal.x;
 
-        #region Wall Slide
+        # region Wall Slide
         if (_onWall)
         {
             if (_velocity.y < -_wallSlideMaxSpeed)
@@ -54,41 +54,40 @@ public class WallMove : MonoBehaviour
                 _velocity.y = -_wallSlideMaxSpeed;
             }
         }
-        #endregion
+        # endregion
 
-        #region Wall Jump
+        # region Wall Jump
 
         if ((_onWall && _velocity.x == 0) || _onGround)
         {
             WallJumping = false;
         }
 
-        if (_desiredJump)
+        if (_desiredJump) // If spacebar is pressed while on the wall
         {
-            if (-_wallDirectionX == _controller.input.RetrieveMoveInput())
+            if (-_wallDirectionX == _controller.input.RetrieveMoveInput()) // If moves left
             {
                 _velocity = new Vector2(_wallJumpClimb.x * _wallDirectionX, _wallJumpClimb.y);
                 WallJumping = true;
                 _desiredJump = false;
             }
-            else if (_controller.input.RetrieveMoveInput() == 0)
+            else if (_controller.input.RetrieveMoveInput() == 0) // If doesn't move
             {
                 _velocity = new Vector2(_wallJumpBounce.x * _wallDirectionX, _wallJumpBounce.y);
                 WallJumping = true;
                 _desiredJump = false;
             }
-            else
+            else // If moves right
             {
                 _velocity = new Vector2(_wallJumpLeap.x * _wallDirectionX, _wallJumpLeap.y);
                 WallJumping = true;
                 _desiredJump = false;
             }
         }
-        #endregion
+        # endregion
 
         _body.velocity = _velocity;
     }
-
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

@@ -42,8 +42,8 @@ public class GroundWallCheck : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         onGround = false;
-        friction = 0.0f;
         onWall = false;
+        friction = 0.0f;
     }
 
     public void EvaluateCollision(Collision2D collision)
