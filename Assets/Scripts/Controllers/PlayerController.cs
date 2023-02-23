@@ -19,4 +19,9 @@ public class PlayerController : InputController
     {
         return Input.GetButton("Jump");
     }
+
+    public override bool RetrieveDashInput()
+    {
+        return Input.GetButton("Dash");
+    }
 }
