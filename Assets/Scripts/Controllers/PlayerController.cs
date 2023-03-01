@@ -22,6 +22,6 @@ public class PlayerController : InputController
 
     public override bool RetrieveDashInput()
     {
-        return Input.GetButton("Dash");
+        return Input.GetButtonDown("Dash");
     }
 }

@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [RequireComponent(typeof(Controller))] // PlayerController input
 public class Dash : MonoBehaviour
 {
-    [SerializeField, Range(0f, 100f)] private float maxSpeed = 8f;
-
     private SpriteRenderer sprite;
     private Rigidbody2D rb;
     private GroundWallCheck ground;
@@ -15,10 +14,10 @@ public class Dash : MonoBehaviour
     private TrailRenderer tr;
 
     private bool onGround;
+    private Vector2 velocity;
 
     [SerializeField] private float dashVelocity = 24f;
     [SerializeField] private float dashTime = 0.2f;
-    [SerializeField] private float dashCoolDown = 1f;
     private Vector2 dashDir;
     bool canDash = true;
     bool isDash;
