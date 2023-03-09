@@ -808,7 +808,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      AOneHospitalTileMapV2_19: -754437761
+      AOneHospitalTileMapV2_9: 1489432704
       AOneHospitalTileMapV2_4: -2060967333
       AOneHospitalTileMapV2_14: 1604323349
       AOneHospitalTileMapV2_25: -1214974847
@@ -840,7 +840,7 @@ TextureImporter:
       AOneHospitalTileMapV2_23: -1043209822
       AOneHospitalTileMapV2_24: 160624387
       AOneHospitalTileMapV2_17: 1033715763
-      AOneHospitalTileMapV2_9: 1489432704
+      AOneHospitalTileMapV2_19: -754437761
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
