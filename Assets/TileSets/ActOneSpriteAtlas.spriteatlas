@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ActOneSpriteAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 270554008, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: -305406232, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: 361207338, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: 295719014, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: 69297982, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: -2060967333, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: 1478432273, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: -441119464, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: 1489432704, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: 1724813035, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: 1281931357, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: -859879822, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: -1808586263, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: 1526169507, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: 1604323349, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: -1061704191, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: 1825979844, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: 1033715763, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: -352040723, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: -754437761, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: -70719173, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: 1150499112, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: 1087098073, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: 207646241, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: 411726961, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: 701325017, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: 1405899724, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: -1043209822, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: -1591104312, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: -1214974847, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: 160624387, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: -1509608039, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  - {fileID: -1528161547, guid: b5ff8bf9634364605b331527fab962fd, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - AOneHospitalTileMapV2_1
+  - AOneHospitalTileMapV2_0
+  - AOneHospitalTileMapV2_3
+  - AOneHospitalTileMapV2_2
+  - AOneHospitalTileMapV2_5
+  - AOneHospitalTileMapV2_4
+  - AOneHospitalTileMapV2_7
+  - AOneHospitalTileMapV2_6
+  - AOneHospitalTileMapV2_9
+  - AOneHospitalTileMapV2_8
+  - AOneHospitalTileMapV2_10
+  - AOneHospitalTileMapV2_11
+  - AOneHospitalTileMapV2_12
+  - AOneHospitalTileMapV2_13
+  - AOneHospitalTileMapV2_14
+  - AOneHospitalTileMapV2_15
+  - AOneHospitalTileMapV2_16
+  - AOneHospitalTileMapV2_17
+  - AOneHospitalTileMapV2_18
+  - AOneHospitalTileMapV2_19
+  - AOneHospitalTileMapV2_29
+  - AOneHospitalTileMapV2_32
+  - AOneHospitalTileMapV2_28
+  - AOneHospitalTileMapV2_30
+  - AOneHospitalTileMapV2_31
+  - AOneHospitalTileMapV2_21
+  - AOneHospitalTileMapV2_20
+  - AOneHospitalTileMapV2_23
+  - AOneHospitalTileMapV2_22
+  - AOneHospitalTileMapV2_25
+  - AOneHospitalTileMapV2_24
+  - AOneHospitalTileMapV2_27
+  - AOneHospitalTileMapV2_26
+  m_RenderDataMap: {}
+  m_Tag: ActOneSpriteAtlas
+  m_IsVariant: 0

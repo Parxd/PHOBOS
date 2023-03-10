@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundCheck : MonoBehaviour
+public class GroundWallCheck : MonoBehaviour
 {
     [SerializeField] private LayerMask jumpableGround;
+    [SerializeField] private LayerMask wall;
     private BoxCollider2D bc;
-    public bool onGround;
-    public float friction;
+    public bool onGround { get; private set; }
+    public bool onWall { get; private set; }
+    public float friction { get; private set; }
+    public Vector2 contactNormal { get; private set; }
 
     private void Start()
     {
@@ -36,8 +39,20 @@ public class GroundCheck : MonoBehaviour
         RetrieveFriction(collision);
     }
 
-    private void EvaluateCollision(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
+        onGround = false;
+        onWall = false;
+        friction = 0.0f;
+    }
+
+    public void EvaluateCollision(Collision2D collision)
+    {
+        for (int i = 0; i < collision.contactCount; i++)
+        {
+            contactNormal = collision.GetContact(i).normal;
+            onWall = Mathf.Abs(contactNormal.x) >= 0.9f;
+        }
         onGround = Physics2D.BoxCast(bc.bounds.center, bc.bounds.size, 0f, Vector2.down, .1f, jumpableGround);
     }
 
